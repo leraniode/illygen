@@ -1,0 +1,30 @@
+# crush
+.crush/
+
+# go
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# misc
+.DS_Store
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.7z
+*.gz
+*.bz2
+
+# IDEs and editors
+.vscode/
+.idea/
+
