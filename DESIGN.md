@@ -85,20 +85,3 @@ Illygen wins where real AI loses:
 | Flexibility | Unlimited | Domain-scoped |
 | Predictability | Low | High |
 | Training data | Massive datasets | Curated knowledge feeds |
-
----
-
-## Versioning Plan
-
-| Version | Scope |
-|---|---|
-| v0.1 | Node, Flow (static), Context, Runtime, KnowledgeStore (in-memory) |
-| v0.2 | Training logic, weighted connections |
-| v0.3 | Exploring logic, incremental adaptation |
-| v0.4+ | Community |
-
----
-
-## Organisation
-
-Illygen is developed under [leraniode](https://github.com/leraniode).

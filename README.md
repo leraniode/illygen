@@ -89,29 +89,22 @@ func main() {
 illygen/
 ├── core/        Node, Flow, Context, Verdict — the building blocks
 ├── knowledge/   KnowledgeUnit, KnowledgeStore — the intelligence feed
-├── learning/    Trainer + Explorer — the two learning modes
 ├── runtime/     The execution engine
 └── internal/    Graph primitives (not for direct use)
 ```
 
 ---
 
-## Roadmap
+## Contribution
 
-| Version | Scope |
-|---|---|
-| **v0.1** | Node, Flow, Context, Runtime, KnowledgeStore ← *you are here* |
-| v0.2 | Training logic, weighted connection reinforcement |
-| v0.3 | Exploring logic, incremental runtime adaptation |
-| v0.4+ | Community |
+> [!NOTE]
+> Contributions are welcome! Please open an issue or submit a pull request.
 
----
+If you have ideas, suggestions, or want to contribute code, please feel free to:
 
-## Organisation
-
-Illygen is developed under [leraniode](https://github.com/leraniode).
-
-Contributions, ideas, and feedback are welcome. Read [DESIGN.md](./DESIGN.md) to understand the vision before contributing.
+- Join the discussion in the [Leraniode Discussions](github.com/leraniode/illygen/discussions)
+- Open an issue for bugs or feature requests
+- Submit a pull request with your changes
 
 ---
 
