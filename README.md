@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/leraniode/.github/main/assets/images/illygenbrandingimage.svg" width="600" height="300" alt="Illygen"/>
+</p>
+
 # Illygen
 
 > A Go-based library and runtime for building intelligence systems.
@@ -94,3 +98,12 @@ If you have ideas, suggestions, or want to contribute code, please feel free to:
 ## License
 
 MIT
+
+---
+
+A [leraniode](https://github.com/leraniode) project.
+<p align="left">
+   <a href="https://github.com/leraniode">
+       <img src="https://raw.githubusercontent.com/leraniode/.github/main/assets/footer/leraniodeproductbrandimage.png" width="400" alt="Leraniode"/>
+   </a>
+</p>
