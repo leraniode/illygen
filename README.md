@@ -4,14 +4,40 @@
 
 # Illygen
 
-
-[![CI](https://github.com/leraniode/illygen/actions/workflows/ci.yml/badge.svg)](https://github.com/leraniode/illygen/actions/workflows/ci.yml)
-[![pkg.go.dev](https://pkg.go.dev/badge/github.com/leraniode/illygen.svg)](https://pkg.go.dev/github.com/leraniode/illygen)
-[![Go Report Card](https://goreportcard.com/badge/github.com/leraniode/illygen)](https://goreportcard.com/report/github.com/leraniode/illygen)
-[![License](https://img.shields.io/github/license/leraniode/illygen.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/tag/leraniode/illygen?label=release)](https://github.com/leraniode/illygen/tags)
-[![Go Version](https://img.shields.io/badge/go-1.22.2-blue.svg)](https://golang.org)
-[![Last Commit](https://img.shields.io/github/last-commit/leraniode/illygen.svg)](https://github.com/leraniode/illygen/commits/main)
+<p align="center">
+   <a href="https://github.com/leraniode">
+      <img src="https://raw.githubusercontent.com/leraniode/.github/main/assets/badges/partofleraniode.svg" alt="Part of Leraniode" width="190" />
+   </a>
+   <a href="https://github.com/leraniode/illygen">
+      <img src="https://raw.githubusercontent.com/leraniode/.github/main/assets/badges/illygenintelligenceleraniode.svg" alt="Illygen Intelligence" width="230" />
+    </a>
+</p>
+<p align="center">
+    <a href="https://github.com/leraniode/illygen/issues">
+      <img src="https://img.shields.io/github/issues/leraniode/illygen" alt="GitHub Issues" />
+    </a>
+    <a href="https://github.com/leraniode/illygen/stargazers">
+      <img src="https://img.shields.io/github/stars/leraniode/illygen" alt="GitHub Stars" />
+    </a>
+    <a href="https://github.com/leraniode/illygen/network/members">
+      <img src="https://img.shields.io/github/forks/leraniode/illygen" alt="GitHub Forks" />
+    </a>
+    <a href="https://github.com/leraniode/illygen/blob/main/LICENSE">
+       <img src="https://img.shields.io/github/license/leraniode/illygen" alt="GitHub License" />
+    </a>
+    <a href="https://github.com/leraniode/illygen/actions/workflows/ci.yml">
+       <img src="https://img.shields.io/github/actions/workflow/status/leraniode/illygen/ci.yml" alt="GitHub Actions CI" />
+    </a>
+    <a href="https://pkg.go.dev/github.com/leraniode/illygen">
+       <img src="https://img.shields.io/badge/pkg.go.dev-illygen-blue" alt="pkg.go.dev" />
+    </a>
+    <a href="https://goreportcard.com/report/github.com/leraniode/illygen">
+       <img src="https://goreportcard.com/badge/github.com/leraniode/illygen" alt="Go Report Card" />
+    </a>
+    <a href="https://github.com/leraniode/illygen/commits/main">
+       <img src="https://img.shields.io/github/last-commit/leraniode/illygen" alt="Last Commit" />
+    </a>
+</p>
 
 > A Go-based library and runtime for building intelligence systems.
 
@@ -28,6 +54,19 @@ Illygen enables developers to build AI-like systems that can **reason, make deci
 | **Node**      | A single unit of reasoning. You consult it, it returns a verdict. Like a neuron. |
 | **Flow**      | A net of connected nodes — the reasoning pipeline. Like a neural network.        |
 | **Knowledge** | The feed of intelligence. The more, the smarter the system.                      |
+
+---
+
+## Installation
+
+To add it to your project, simply use:
+
+```sh
+go get github.com/leraniode/illygen@latest
+```
+
+Or add it to your `go.mod` by importing `github.com/leraniode/illygen` in your code and running `go mod tidy`.
+
 
 ---
 
