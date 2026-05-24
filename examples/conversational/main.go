@@ -14,18 +14,18 @@ import (
 func main() {
 	// Create a knowledge store and add a couple of units.
 	store := illygen.NewKnowledgeStore()
-	_ = store.Add("greet-1", "greetings", map[string]any{
+	must(store.Add("greet-1", "greetings", map[string]any{
 		"keywords": []string{"hello", "hi", "hey"},
 		"response": "Hello! How can I help you today?",
-	})
-	_ = store.Add("greet-2", "greetings", map[string]any{
+	}))
+	must(store.Add("greet-2", "greetings", map[string]any{
 		"keywords": []string{"bye", "goodbye", "see ya"},
 		"response": "Goodbye! Take care.",
-	})
-	_ = store.Add("smalltalk", "smalltalk", map[string]any{
+	}))
+	must(store.Add("smalltalk", "smalltalk", map[string]any{
 		"keywords": []string{"how are you", "how're you", "how are things"},
 		"response": "I'm a tiny reasoning engine — feeling deterministic today!",
-	})
+	}))
 
 	// Define a single chat node that consults the KnowledgeStore.
 	chat := illygen.NewNode("chat", func(ctx illygen.Context) illygen.Result {
@@ -88,5 +88,12 @@ func main() {
 			continue
 		}
 		fmt.Println(res.Value)
+	}
+}
+
+// must panics if err is non-nil. Used at startup to catch bad knowledge setup immediately.
+func must(err error) {
+	if err != nil {
+		panic(err)
 	}
 }

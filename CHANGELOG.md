@@ -44,14 +44,16 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Initial release
-- `Node` — define reasoning units as plain Go functions via `NodeFunc`
-- `Flow` — connect nodes into a weighted reasoning pipeline
-- `Engine` — runs flows, returns `Result` with `Value` and `Confidence`
-- `Context` — key-value map carrying data through flow execution
-- `Result` — output of a node; `Value`, `Confidence`, `Next`
-- `KnowledgeStore` — structured knowledge store, domain-scoped
-- `KnowledgeUnit` — atomic knowledge unit with facts and weight
-- `illygen.Knowledge(ctx)` — query the store from inside a NodeFunc
-- `examples/intent/` — intent detection example (input → action)
-- Frozen public API — nothing in `internal/` is accessible to users
+- `Node` — atomic reasoning unit with `id` and `NodeFunc`. Panics on empty id or nil fn
+- `Flow` — directed weighted graph of nodes. Fluent API: `Add()`, `Link()`, `Entry()`
+- `Engine` — execution engine. `Run(flow, ctx)` walks the flow and returns a `Result`
+- `Context` — typed key-value map passed through every node during execution
+- `Result` — output of node/flow execution: `Value`, `Confidence`, `Next`
+- `KnowledgeStore` — domain-scoped knowledge shelf. `Add()`, `Get()`, `Domain()`, `Size()`
+- `KnowledgeUnit` — atomic piece of knowledge with structured `Facts` and a `Weight`
+- `illygen.Knowledge(ctx)` — retrieves the `KnowledgeStore` injected by the engine
+- `examples/intent` — full intent-detection REPL demonstrating the complete v0.1 API
+- `internal/graph` — private weighted graph (adjacency list, O(1) add, O(E) walk)
+- `internal/runtime` — executor: entry-point resolution, cycle detection (maxVisits=50), error propagation
+- `go.mod` at `github.com/leraniode/illygen`, `go 1.22`
+- MIT License
