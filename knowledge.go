@@ -40,7 +40,8 @@ func (u *KnowledgeUnit) Fact(key string) any {
 }
 
 // KnowledgeStore holds all KnowledgeUnits for an Illygen engine.
-// Nodes query it by domain to retrieve relevant knowledge during execution.
+// Nodes query it during execution via illygen.Knowledge(ctx).Domain(domain).
+// The store is safe for concurrent access.
 type KnowledgeStore struct {
 	mu    sync.RWMutex
 	units map[string]*KnowledgeUnit
@@ -85,7 +86,8 @@ func (s *KnowledgeStore) Add(id, domain string, facts map[string]any) error {
 	return nil
 }
 
-// Get retrieves a KnowledgeUnit by ID.
+// Get retrieves a single KnowledgeUnit by ID.
+// Returns (nil, false) if no unit with that ID exists.
 func (s *KnowledgeStore) Get(id string) (*KnowledgeUnit, bool) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -93,8 +95,9 @@ func (s *KnowledgeStore) Get(id string) (*KnowledgeUnit, bool) {
 	return u, ok
 }
 
-// Domain returns all KnowledgeUnits in a given domain, sorted by weight descending.
-// This is how nodes query knowledge — by domain, not by ID.
+// Domain returns all KnowledgeUnits belonging to the given domain,
+// sorted by Weight descending (most trusted first).
+// Returns an empty slice if no units exist for that domain.
 func (s *KnowledgeStore) Domain(domain string) []*KnowledgeUnit {
 	s.mu.RLock()
 	defer s.mu.RUnlock()

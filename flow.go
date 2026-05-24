@@ -7,15 +7,18 @@ import (
 )
 
 // Flow is a net of connected nodes — the reasoning pipeline.
-// Like a neural network, it is a directed weighted graph.
-// Nodes are added with Add(), connected with Link().
+// Internally it is a directed weighted graph: nodes are vertices,
+// Links are edges. The engine walks this graph during execution.
 //
-// Example:
+// Build a flow with the fluent API:
 //
 //	flow := illygen.NewFlow().
 //	    Add(inputNode).
 //	    Add(outputNode).
 //	    Link("input", "output", 1.0)
+//
+// The first node passed to Add becomes the entry point unless
+// overridden by Entry.
 type Flow struct {
 	nodes map[string]*Node
 	graph *graph.Graph
@@ -32,6 +35,7 @@ func NewFlow() *Flow {
 
 // Add registers a node into the flow.
 // The first node added becomes the entry point automatically.
+// Passing a nil node panics immediately with a clear message.
 // Returns the Flow for chaining.
 func (f *Flow) Add(node *Node) *Flow {
 	if node == nil {
@@ -44,20 +48,23 @@ func (f *Flow) Add(node *Node) *Flow {
 	return f
 }
 
-// Link connects two nodes with a weight.
-// Weight represents the strength of this connection (0.0 to 1.0).
-// Higher weight connections are preferred by the engine.
+// Link connects two nodes with a weight (0.0 to 1.0).
+// When a node's Result does not specify a Next, the engine follows
+// the highest-weight link automatically.
+// Duplicate links are silently ignored — the first call wins.
 // Returns the Flow for chaining.
 func (f *Flow) Link(from, to string, weight float64) *Flow {
 	if err := f.graph.Add(from, to, weight); err != nil {
-		// edge already exists — silently skip for fluent API usability
+		// duplicate edge — silently skip for fluent API usability
 		_ = err
 	}
 	return f
 }
 
 // Entry explicitly sets which node the flow starts from.
-// Useful when the first node added is not the intended entry point.
+// By default the first node passed to Add is the entry.
+// Use Entry when you add nodes out of order or want to change
+// the starting point after building the flow.
 func (f *Flow) Entry(nodeID string) *Flow {
 	f.entry = nodeID
 	return f

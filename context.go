@@ -1,7 +1,8 @@
 package illygen
 
-// Context is a simple map that carries data through a flow execution.
-// It is the single source of truth passed to every node during a run.
+// Context is a key-value map that carries data through a flow execution.
+// It is the single source of truth shared across all nodes in one engine.Run call.
+// Nodes read from it, write to it, and pass signals to each other through it.
 //
 // Example:
 //
@@ -27,7 +28,7 @@ func (c Context) Has(key string) bool {
 	return ok
 }
 
-// String is a convenience method that returns a context value as a string.
+// String returns a context value as a string.
 // Returns an empty string if the key doesn't exist or is not a string.
 func (c Context) String(key string) string {
 	v, _ := c[key].(string)

@@ -2,9 +2,7 @@
 // Users interact with Engine in the illygen package — not this directly.
 package runtime
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // maxVisits is the maximum number of times a single node can be visited
 // in one flow execution before the engine declares a cycle and returns an error.
@@ -20,9 +18,6 @@ type Step struct {
 }
 
 // ExecutionTrace is the complete record of a flow execution.
-// It is used by the engine to return results and, in future versions,
-// by the learning logic to adjust weights.
-// ExecutionTrace is the complete record of a flow execution.
 // Steps holds every node visited in order.
 // Final holds the last step — its Value and Confidence are returned to the caller.
 // In future versions, the learning logic will read the trace to adjust weights.
@@ -32,25 +27,24 @@ type ExecutionTrace struct {
 	Done  bool
 }
 
-// NodeExecutor is a function that runs a node — the engine calls this
-// to decouple the executor from the illygen package types.
+// NodeExecutor is the function the engine passes to Execute.
+// It decouples the executor from illygen package types, keeping internal/ clean.
 type NodeExecutor func(nodeID string) (value any, confidence float64, next string, err error)
 
-// Execute runs the flow from the entry node, walking the graph
-// until a node returns an empty Next or no outgoing edges exist.
+// Execute runs the flow starting from entry, calling executor for each node,
+// and following the returned next node until execution ends.
 //
-// This is the core algorithm:
+// Algorithm:
 //
-//	Start at entry node
-//	Loop:
-//	  execute node → get result
-//	  choose next node (from result.Next or highest-weight edge)
-//	  move to next node
-//	Stop when no next node
+//	current = entry
+//	loop:
+//	  (value, confidence, next) = executor(current)
+//	  record step
+//	  current = next
+//	until current == ""
 func Execute(entry string, executor NodeExecutor) (*ExecutionTrace, error) {
 	trace := &ExecutionTrace{}
 	current := entry
-
 	visited := make(map[string]int)
 
 	for current != "" {
